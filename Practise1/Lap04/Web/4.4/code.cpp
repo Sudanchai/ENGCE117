@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #include <string.h>
 
 struct studentNode {
@@ -18,7 +19,7 @@ void SaveNode(struct studentNode * child,
 } //end function
 
 void GoNext1(struct studentNode ** walk) {
-  *walk = (*walk) -> next;
+  * walk = ( * walk) -> next;
 } //end function
 
 int main() {
@@ -38,7 +39,7 @@ int main() {
   now1 = start;
   now2 = & start;
 
-  GoNext1(&now1);
+  GoNext1( & now1);
   printf("%s ", now1 -> name);
 
   return 0;

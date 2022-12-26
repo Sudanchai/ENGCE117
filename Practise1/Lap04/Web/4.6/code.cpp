@@ -18,9 +18,8 @@ void SaveNode(struct studentNode * child,
   child -> gpa = g;
 } //end function
 
-void GoNext1(struct studentNode ** * walk) {
-  **
-  walk = ( ** walk) -> next;
+void GoNext1(struct studentNode *** walk) {
+  ** walk = ( ** walk) -> next;
 } //end function
 
 int main() {

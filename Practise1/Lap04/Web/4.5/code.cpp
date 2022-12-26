@@ -18,7 +18,7 @@ void SaveNode(struct studentNode * child,
   child -> gpa = g;
 } //end function
 
-void GoNext1(struct studentNode ** walk) {
+void GoNext2(struct studentNode ** walk) {
   * walk = ( * walk) -> next;
 } //end function
 
@@ -39,7 +39,7 @@ int main() {
   now1 = start;
   now2 = & start;
 
-  GoNext1(now2);
+  GoNext2(now2);
   printf("%s ", ( * now2) -> name);
 
   return 0;

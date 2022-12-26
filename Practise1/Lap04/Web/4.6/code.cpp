@@ -9,8 +9,7 @@ struct studentNode {
   struct studentNode * next;
 };
 
-void SaveNode(struct studentNode * child,
-  const char * n, int a, char s, float g) {
+void SaveNode(struct studentNode * child, const char * n, int a, char s, float g) {
   strcpy(child -> name, n);
   child -> age = a;
   child -> sex = s;

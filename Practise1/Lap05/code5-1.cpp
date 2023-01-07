@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 struct studentNode {
   char name[20];
@@ -9,28 +10,10 @@ struct studentNode {
   struct studentNode * next;
 };
 
-void showAll(struct studentNode * walk) {
-  while (walk != NULL) {
-    printf("%s ", walk -> name);
-    walk = walk -> next;
-  } //end while
-  printf(" ");
-} //end function
-
-void AddNode(struct studentNode * child, const char * n, int a, char s, float g){
-    strcpy(child -> name, n);
-    child -> age = a;
-    child -> sex = s;
-    child -> gpa = g;
-}
-
-void InsNode(){
-    
-}
-
-void DelNode(){
-    
-}
+struct studentNode * AddNode(struct studentNode ** head, char n[], int a, char s, float g);
+void InsNode(struct studentNode * prev, char n[], int a, char s, float g);
+void DelNode(struct studentNode * prev);
+void ShowAll(struct studentNode * walk);
 
 int main() {
   struct studentNode * start, * now;
@@ -46,4 +29,49 @@ int main() {
   DelNode(now);
   ShowAll(start);
   return 0;
+} //end function
+
+void ShowAll(struct studentNode * walk) {
+  while (walk != NULL) {
+    printf("%s ", walk -> name);
+    walk = walk -> next;
+  }
+  printf(" ");
+} //end function
+
+struct studentNode * AddNode(struct studentNode ** head, char n[], int a, char s, float g) {
+
+  struct studentNode * newNode = (struct studentNode * ) malloc(sizeof(struct studentNode));
+
+  strcpy(newNode -> name, n);
+  newNode -> age = a;
+  newNode -> sex = s;
+  newNode -> gpa = g;
+  newNode -> next = NULL;
+  if ( * head == NULL) {
+    * head = newNode;
+  } else {
+    newNode -> next = * head;
+    * head = newNode;
+  }
+
+  return newNode;
+} //end function
+
+void InsNode(struct studentNode * prev, char n[], int a, char s, float g) {
+
+  struct studentNode * newNode = (struct studentNode * ) malloc(sizeof(struct studentNode));
+
+  strcpy(newNode -> name, n);
+  newNode -> age = a;
+  newNode -> sex = s;
+  newNode -> gpa = g;
+  newNode -> next = prev -> next;
+  prev -> next = newNode;
+} //end function
+
+void DelNode(struct studentNode * prev) {
+  struct studentNode * delNode = prev -> next;
+  prev -> next = delNode -> next;
+  free(delNode);
 } //end function

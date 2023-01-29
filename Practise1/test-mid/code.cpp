@@ -1,4 +1,5 @@
 //แดนชัย สุรินทร์ รหัส65543206058-1 sec 2
+//https://youtu.be/bD_0HRGD1EY
 
 #include <stdio.h>
 #include <stdlib.h>

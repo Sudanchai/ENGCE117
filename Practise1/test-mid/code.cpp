@@ -65,13 +65,11 @@ void SwapNode(struct StructureNode ** head, int first, int second) {
 
   if (prevFirst) {
     prevFirst -> next = secondNode;
-  }
-  else * head = secondNode;
+  } else * head = secondNode;
 
   if (prevSecond) {
     prevSecond -> next = firstNode;
-  }
-  else * head = firstNode;
+  } else * head = firstNode;
 
   struct StructureNode * temp = secondNode -> next;
   secondNode -> next = firstNode -> next;

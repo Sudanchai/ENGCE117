@@ -1,5 +1,4 @@
 //แดนชัย สุรินทร์ รหัส65543206058-1 sec 2
-//https://youtu.be/bD_0HRGD1EY
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -102,7 +101,6 @@ int main() {
   printf("\n------------------------------\n");
   printf(" Showback\n");
   Showback(head);
-  //ShowAll(head); //40, 30, 20, 99
   printf("\n------------------------------\n");
   printf(" SwapNode\n");
   SwapNode( & head, 30, 40);

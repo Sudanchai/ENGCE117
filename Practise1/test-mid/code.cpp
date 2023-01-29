@@ -36,62 +36,52 @@ void ShowAll(struct StructureNode * head) {
   printf(" ");
 } //end function
 
-void UpdateNode(struct StructureNode ** head, int ref, int want) {
-  if ( * head == NULL)
-    return;
-  struct StructureNode * prevref = NULL, * currref = * head;
-  while (currref && currref -> data != ref) {
-    prevref = currref;
-    currref = currref -> next;
+void UpdateNode(struct StructureNode * head, int ref, int want) {
+  struct StructureNode * curr = head;
+  while (curr && curr -> data != ref) {
+    curr = curr -> next;
   }
-
-  if (currref == NULL)
-    return;
-
-  currref -> data = want;
+  if (curr) {
+    curr -> data = want;
+  }
 } //end function
 
 void SwapNode(struct StructureNode ** head, int first, int second) {
-  if ( * head == NULL)
-    return;
-  struct StructureNode * prevfirst = NULL, * currfirst = * head;
-  while (currfirst && currfirst -> data != first) {
-    prevfirst = currfirst;
-    currfirst = currfirst -> next;
+  if (head == NULL || first == second) return;
+
+  struct StructureNode * firstNode = * head, * secondNode = * head;
+  struct StructureNode * prevFirst = NULL, * prevSecond = NULL;
+
+  while (firstNode && firstNode -> data != first) {
+    prevFirst = firstNode;
+    firstNode = firstNode -> next;
+  }
+  while (secondNode && secondNode -> data != second) {
+    prevSecond = secondNode;
+    secondNode = secondNode -> next;
   }
 
-  struct StructureNode * prevsecond = NULL, * currsecond = * head;
-  while (currsecond && currsecond -> data != second) {
-    prevsecond = currsecond;
-    currsecond = currsecond -> next;
+  if (firstNode == NULL || secondNode == NULL) return;
+
+  if (prevFirst) {
+    prevFirst -> next = secondNode;
   }
+  else * head = secondNode;
 
-  if (currfirst == NULL || currsecond == NULL)
-    return;
+  if (prevSecond) {
+    prevSecond -> next = firstNode;
+  }
+  else * head = firstNode;
 
-  if (prevfirst != NULL)
-    prevfirst -> next = currsecond;
-  else
-    *
-    head = currsecond;
-
-  if (prevsecond != NULL)
-    prevsecond -> next = currfirst;
-  else
-    *
-    head = currfirst;
-
-  struct StructureNode * temp = currsecond -> next;
-  currsecond -> next = currfirst -> next;
-  currfirst -> next = temp;
+  struct StructureNode * temp = secondNode -> next;
+  secondNode -> next = firstNode -> next;
+  firstNode -> next = temp;
 } //end function
 
-void Showback(struct StructureNode * node) {
-  if (node == NULL) {
-    return;
-  }
-  Showback(node -> next);
-  printf("%d ", node -> data);
+void Showback(struct StructureNode * head) {
+  if (head == NULL) return;
+  Showback(head -> next);
+  printf("%d ", head -> data);
 } //end function
 
 int main() {
@@ -105,10 +95,10 @@ int main() {
   ShowAll(head); //10, 20, 30, 40
   printf("\n------------------------------\n");
   printf(" Update_Node 10 to 99 \n");
-  UpdateNode( & head, 10, 99);
+  UpdateNode(head, 10, 99);
   ShowAll(head);
   printf("\n Update_Node 10 to 98 \n");
-  UpdateNode( & head, 10, 98);
+  UpdateNode(head, 10, 98);
   ShowAll(head); //99, 20, 30, 40
   printf("\n------------------------------\n");
   printf(" Showback\n");
@@ -116,6 +106,6 @@ int main() {
   //ShowAll(head); //40, 30, 20, 99
   printf("\n------------------------------\n");
   printf(" SwapNode\n");
-  SwapNode( & head, 40, 20);
+  SwapNode( & head, 30, 40);
   ShowAll(head); //99, 40, 30, 20
 }

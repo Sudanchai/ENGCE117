@@ -1,42 +1,36 @@
 #include <stdio.h>
 #include <string.h>
 
-struct studentNode
-{
+struct studentNode {
   char name[20];
   int age;
   char sex;
   float gpa;
-  struct studentNode *next;
-  struct studentNode *back;
+  struct studentNode * next;
+  struct studentNode * back;
 };
 
-class LinkedList
-{
-protected:
-  struct studentNode *start, **now;
+class LinkedList {
+  protected: struct studentNode * start,
+  ** now;
 
-public:
-  LinkedList();  // กำหนดค่าเริ่มต้นของ start และ now
-  ~LinkedList(); // คืนหน่วยความจำที่จองไว้ในลิงค์ลิสต์ทุกโหนด
+  public: LinkedList();
+  ~LinkedList();
   void InsNode(char n[], int a, char s, float g);
   void DelNode();
-  void GoNext(); // เปลี่ยนโหนดปัจจุบันไปชี้ที่โหนดถัดไป
+  void GoNext();
   virtual void ShowNode();
 }; // end class
 
-class NewList : public LinkedList
-{
-public:
-  void GoFirst();          // เปลี่ยนโหนดปัจจุบันไปชี้ที่โหนดเริ่มต้น
-  virtual void ShowNode(); // แสดงข้อมูลในทุกโหนดตั้งแต่เริ่มต้นถึงสุดท้าย
-};                         // end class
+class NewList: public LinkedList {
+  public: void GoFirst();
+  virtual void ShowNode();
+}; // end class
 
-int main()
-{
+int main() {
   LinkedList listA;
   NewList listB;
-  LinkedList *listC = new NewList();
+  LinkedList * listC = new NewList();
 
   listA.InsNode("one", 1, 'A', 1.1);
   listA.InsNode("two", 2, 'B', 2.2);
@@ -51,99 +45,83 @@ int main()
   listB.DelNode();
   listB.ShowNode();
 
-  listC = &listA;
-  listC->GoNext();
-  listC->ShowNode();
+  listC = & listA;
+  listC -> GoNext();
+  listC -> ShowNode();
 
-  listC = &listB;
-  listC->ShowNode();
+  listC = & listB;
+  listC -> ShowNode();
 
   return 0;
 };
 
-void LinkedList ::InsNode(char n[], int a, char s, float g)
-{
-  struct studentNode *temp = new studentNode;
-  strcpy(temp->name, n);
-  temp->age = a;
-  temp->sex = s;
-  temp->gpa = g;
+void LinkedList::InsNode(char n[], int a, char s, float g) {
+  struct studentNode * temp = new studentNode;
+  strcpy(temp -> name, n);
+  temp -> age = a;
+  temp -> sex = s;
+  temp -> gpa = g;
 
-  temp->next = start;
-  temp->back = NULL;
+  temp -> next = start;
+  temp -> back = NULL;
 
-  if (start != NULL)
-  {
-    start->back = temp;
+  if (start != NULL) {
+    start -> back = temp;
   }
   start = temp;
-  now = &start;
+  now = & start;
 } // end function
 
-void LinkedList ::GoNext()
-{
-  now = &(*now)->next;
+void LinkedList::GoNext() {
+  now = & ( * now) -> next;
 } // end function
 
-void LinkedList ::ShowNode()
-{
-  printf("%s %d %c %f\n", (*now)->name, (*now)->age, (*now)->sex, (*now)->gpa);
+void LinkedList::ShowNode() {
+  printf("%s %d %c %f\n", ( * now) -> name, ( * now) -> age, ( * now) -> sex, ( * now) -> gpa);
 } // end function
 
-void NewList ::ShowNode()
-{
-  struct studentNode *temp;
-  if (start != NULL)
-  {
+void NewList::ShowNode() {
+  struct studentNode * temp;
+  if (start != NULL) {
     temp = start;
-  }
-  else
-  {
+  } else {
     start = temp;
   }
 
-  while (start != NULL)
-  {
-    printf("%s ", start->name);
-    start = start->next;
+  while (start != NULL) {
+    printf("%s ", start -> name);
+    start = start -> next;
   } // end loop
   printf("\n");
 
 } // end function
 
-void NewList ::GoFirst()
-{
-  now = &(start);
+void NewList::GoFirst() {
+  now = & (start);
 }
 
-LinkedList ::LinkedList()
-{
+LinkedList::LinkedList() {
   start = NULL;
 }
 
-LinkedList ::~LinkedList()
-{
+LinkedList::~LinkedList() {
   delete start;
   delete now;
 }
 
-void LinkedList ::DelNode()
-{
-  if (*now == NULL)
-  {
+void LinkedList::DelNode() {
+  if ( * now == NULL) {
     return;
   }
 
-  struct studentNode *temp = *now;
-  if ((*now)->back != NULL)
-  {
-    (*now)->back->next = (*now)->next;
+  struct studentNode * temp = * now;
+  if (( * now) -> back != NULL) {
+    ( * now) -> back -> next = ( * now) -> next;
   }
 
-  if ((*now)->next != NULL)
-  {
-    (*now)->next->back = (*now)->back;
-    *now = (*now)->next;
+  if (( * now) -> next != NULL) {
+    ( * now) -> next -> back = ( * now) -> back;
+    * now = ( * now) -> next;
   }
   delete temp;
 

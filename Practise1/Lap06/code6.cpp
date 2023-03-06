@@ -31,6 +31,14 @@ int main() {
     return 0 ;
 }//end function
 
+void ShowAll( struct studentNode *walk ) {
+    while( walk != NULL ) {
+    printf( "%s ", walk->name ) ;
+    walk = walk->next ;
+    }//end while
+    printf( " \n" ) ;
+}//end function
+
 struct studentNode *AddNode( struct studentNode **walk, char n[], int a, char s, float g ){
     struct studentNode *temp = NULL;
 
@@ -93,11 +101,3 @@ void DelNode( struct studentNode *walk ){
     walk = temp;
     walk->back;
 }
-
-void ShowAll( struct studentNode *walk ) {
-    while( walk != NULL ) {
-    printf( "%s ", walk->name ) ;
-    walk = walk->next ;
-    }//end while
-    printf( " \n" ) ;
-}//end function
